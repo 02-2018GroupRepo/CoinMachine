@@ -12,12 +12,15 @@ public class SnackMachine extends AbstractMachine {
         myMachineID = ++AbstractMachine.lastMachineID;
         this.myLocation= location;
 
+
         createRows();
+        //Comment out for testing
         createLogFile();
 
         hardCodedMachineFiller();
 
         coinBuffer = new CoinBuffer(this);
+        //Comment out for testing
         coinBuffer.initiateInterface();
 
     }

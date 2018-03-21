@@ -42,14 +42,19 @@ public abstract class AbstractMachine {
         return myLocation;
     }
 
-    void getMoneyAmount(){
+    public double getMoneyAmount(){
         double total =0;
         for(Map.Entry<COINS, Integer> m : holdings.entrySet()){
-            System.out.println(m.getKey() + ":\t\t" + m.getValue());
             total+= m.getKey().getValue() * m.getValue();
         }
-        System.out.println("Total $:\t"+total);
+        return total;
     }
+
+    // used to return each coin
+//            for(Map.Entry<COINS, Integer> m : holdings.entrySet()){
+//            System.out.println(m.getKey() + ":\t\t" + m.getValue());
+//            total+= m.getKey().getValue() * m.getValue();
+//        }
 
     void changeLocation(String location) {
         this.myLocation = location;
