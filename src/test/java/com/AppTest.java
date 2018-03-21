@@ -1,6 +1,6 @@
-package com
+package com;
 
-package;
+//package;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
