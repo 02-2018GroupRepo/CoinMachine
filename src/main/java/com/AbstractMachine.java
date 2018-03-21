@@ -79,16 +79,16 @@ public abstract class AbstractMachine {
                 row = 0;
                 break;
             case 'B':
-                row = 0;
+                row = 1;
                 break;
             case 'C':
-                row = 0;
+                row = 2;
                 break;
             case 'D':
-                row = 0;
+                row = 3;
                 break;
             case 'E':
-                row = 0;
+                row = 4;
                 break;
             default:
                 throw new BADENTRY();
