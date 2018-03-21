@@ -51,10 +51,11 @@ public abstract class AbstractMachine {
     }
 
     // used to return each coin
-//            for(Map.Entry<COINS, Integer> m : holdings.entrySet()){
-//            System.out.println(m.getKey() + ":\t\t" + m.getValue());
-//            total+= m.getKey().getValue() * m.getValue();
-//        }
+    public void getCoinAmount() {
+        for (Map.Entry<COINS, Integer> m : holdings.entrySet()) {
+            System.out.println(m.getKey() + ":\t\t" + m.getValue());
+        }
+    }
 
     void changeLocation(String location) {
         this.myLocation = location;
