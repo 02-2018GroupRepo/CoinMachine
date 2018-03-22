@@ -11,7 +11,6 @@ public class SnackMachine extends AbstractMachine {
    public SnackMachine(){}
 
    public SnackMachine(String location) {
-        myMachineID = ++AbstractMachine.lastMachineID;
         this.myLocation= location;
 
 
@@ -25,41 +24,6 @@ public class SnackMachine extends AbstractMachine {
 
     }
 
-    public void createLogFile(){
-        String machineStringID = Integer.toString(myMachineID);
-
-
-        String log;
-        String OS = System.getProperty("os.name").toLowerCase();
-        if(OS.contains("windows")){
-            log="logs\\";
-        }else
-        {
-            log = "logs/";
-
-        }
-
-
-        URL logFolder = getClass().getResource(log);
-        String machineLogPath = logFolder.getPath() + machineStringID + ".txt";
-
-        File file = new File(machineLogPath);
-
-        try {
-            if (file.createNewFile()) {
-                FileWriter writer = new FileWriter(file);
-                writer.write("Created \t\t\t " + LocalDateTime.now());
-                writer.flush();
-                writer.close();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
-    }
     public void displayInventory(){
 
         for (LinkedList[] row : machine) {

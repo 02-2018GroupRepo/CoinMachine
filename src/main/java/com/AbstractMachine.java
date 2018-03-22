@@ -1,5 +1,12 @@
 package com;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -10,9 +17,9 @@ public abstract class AbstractMachine {
     static final String COMPANY = "Backpfeifengesicht";
     private Map<COINS, Integer> holdings = new HashMap<COINS, Integer>();
     private String myLocation;
-    protected static int lastMachineID = 12345;
     private LinkedList<Product>[][] machine;
     private CoinBuffer coinBuffer;
+    private String machineId;
 
     public enum COINS {
         NICKEL(.05), DIME(.10), QUARTER(.25);
@@ -40,7 +47,6 @@ public abstract class AbstractMachine {
         return myLocation;
     }
 
-
     public double getMoneyAmount(){
         double total =0;
         for(Map.Entry<COINS, Integer> m : holdings.entrySet()){
@@ -50,10 +56,11 @@ public abstract class AbstractMachine {
     }
 
     // used to return each coin
-    public void getCoinAmount() {
-        for (Map.Entry<COINS, Integer> m : holdings.entrySet()) {
-            System.out.println(m.getKey() + ":\t\t" + m.getValue());
-        }
+    public Map getCoinAmount() {
+//        for (Map.Entry<COINS, Integer> m : holdings.entrySet()) {
+//            System.out.println(m.getKey() + ":\t\t" + m.getValue());
+//        }
+        return holdings;
     }
 
     //Methods
@@ -165,6 +172,68 @@ public abstract class AbstractMachine {
 
     //Abstract methods
     abstract void displayInventory();
+
+    public void getLogFile() {
+
+            String log;
+            String OS = System.getProperty("os.name").toLowerCase();
+            if(OS.contains("windows")){
+                log="logs\\";
+            }else
+            {
+                log = "logs/";
+
+            }
+            String logPathName = log + myMachineID + ".txt";
+
+            URL url = getClass().getResource(logPathName);
+            File file = new File(url.getPath());
+
+            try (BufferedReader reader = Files.newBufferedReader(file.toPath())){
+
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
+            } catch (IOException x) {
+                System.err.format("IOException: %s%n", x);
+            } catch (NullPointerException n) {
+                System.out.println("You must be using Windows you filthy animal?");
+            }
+
+        }
+
+    }
+
+    public void createLogFile(){
+        String log;
+        String OS = System.getProperty("os.name").toLowerCase();
+        if(OS.contains("windows")){
+            log="logs\\";
+        }else
+        {
+            log = "logs/";
+
+        }
+
+        URL logFolder = getClass().getResource(log);
+        String machineLogPath = logFolder.getPath() + ".txt";
+
+        File file = new File(machineLogPath);
+
+        try {
+            if (file.createNewFile()) {
+                FileWriter writer = new FileWriter(file);
+                writer.write("Created \t\t\t " + LocalDateTime.now());
+                writer.flush();
+                writer.close();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     //Probably useless
     //returns a String of accepted coins
