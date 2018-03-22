@@ -1,5 +1,6 @@
 package com;
 
+
 public class Product {
     String name;
     String description;

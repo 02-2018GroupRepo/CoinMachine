@@ -35,20 +35,26 @@ public abstract class AbstractMachine {
         holdings.put(COINS.NICKEL, 0);
         holdings.put(COINS.DIME, 0);
         holdings.put(COINS.QUARTER, 0);
-        getLogFile("123");
+      //  getLogFile("123");
     }
 
     public String getMyLocation() {
         return myLocation;
     }
 
-    void getMoneyAmount(){
+    public double getMoneyAmount(){
         double total =0;
         for(Map.Entry<COINS, Integer> m : holdings.entrySet()){
-            System.out.println(m.getKey() + ":\t\t" + m.getValue());
             total+= m.getKey().getValue() * m.getValue();
         }
-        System.out.println("Total $:\t"+total);
+        return total;
+    }
+
+    // used to return each coin
+    public void getCoinAmount() {
+        for (Map.Entry<COINS, Integer> m : holdings.entrySet()) {
+            System.out.println(m.getKey() + ":\t\t" + m.getValue());
+        }
     }
 
     void changeLocation(String location) {
@@ -72,8 +78,6 @@ public abstract class AbstractMachine {
         char[] entry = RowColumn.toCharArray();
         int row;
         int col;
-
-
         switch (entry[0]) {
             case 'A':
                 row = 0;
@@ -93,19 +97,16 @@ public abstract class AbstractMachine {
             default:
                 throw new BADENTRY();
         }
-        col = entry[1];
+        col = Character.getNumericValue(entry[1]);
         machine[row][col].add(product);
     }
 
-    public double removeItem(String RowColumn, double runningTotal) throws BADENTRY, INSUFFICIENTFUNDS{
-
+    public double removeItem(String RowColumn, double runningTotal) throws BADENTRY, INSUFFICIENTFUNDS {
         char[] entry = RowColumn.toCharArray();
         int row;
         int col;
-
-
         switch (entry[0]) {
-            case 'A' :
+            case 'A':
                 row = 0;
                 break;
             case 'B':
@@ -125,24 +126,25 @@ public abstract class AbstractMachine {
         }
         col = Character.getNumericValue(entry[1]);
 
-        if( machine[row][col].isEmpty()){
+        if (machine[row][col].isEmpty()) {
             throw new BADENTRY();
         }
 
-        double price = (((Product) machine[row][col].peek()).retailPrice);
+        double price = 0;
 
         try {
-            if(price>runningTotal){
+            price = ((Product)machine[row][col].peek()).retailPrice;
+            if (price > runningTotal) {
                 throw new INSUFFICIENTFUNDS();
             }
 
             machine[row][col].pop();
 
-        }catch (ArrayIndexOutOfBoundsException ar){
+        } catch (ArrayIndexOutOfBoundsException ar) {
             throw new BADENTRY();
 
         }
-        return runningTotal-price;
+        return runningTotal - price;
     }
     abstract void displayInventory();
     public void getLogFile(String employeeID) {

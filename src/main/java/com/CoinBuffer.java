@@ -16,7 +16,6 @@ public class CoinBuffer {
         holdings.put(AbstractMachine.COINS.QUARTER, 0);
 
         parentMachine = ab;
-        int d = 9;
     }
 
     private void flush() {
