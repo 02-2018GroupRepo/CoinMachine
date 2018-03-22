@@ -9,18 +9,33 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Operator {
 
-public void getTotalMoneyByLocation(String location){
+public void getTotalMoneyByLocation(String location, Map<String, String> locationMap){
 
-    String tURL = "http://192.168.88.167:8080/requestAmount";
+    double total = 0;
+
+    for(Map.Entry<String, String> m : locationMap.entrySet()){
+        if(m.getValue().equals(location)){
+            total += sendMoneyCall(m.getKey());
+        }
+    }
+
+
+}
+
+private double sendMoneyCall(String ID){
+
+    String tURL = "http://192.168.88."+ ID + ":8080/requestAmount";
     UriComponentsBuilder builder = UriComponentsBuilder.
             fromUriString(tURL);
 
     RestTemplate restTemplate = new RestTemplate();
 
 
-    String response = restTemplate.getForObject(builder.toUriString(), String.class);
+    double response = restTemplate.getForObject(builder.toUriString(), double.class);
+    return response;
 }
 }
