@@ -1,5 +1,7 @@
 package com;
 
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -11,6 +13,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+
+@Component
 public abstract class AbstractMachine {
 
     //Instance variables
