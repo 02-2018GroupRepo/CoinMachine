@@ -8,9 +8,9 @@ import java.util.LinkedList;
 
 public class SnackMachine extends AbstractMachine {
 
-    SnackMachine(){}
+   public SnackMachine(){}
 
-    SnackMachine(String location) {
+   public SnackMachine(String location) {
         myMachineID = ++AbstractMachine.lastMachineID;
         this.myLocation= location;
 
