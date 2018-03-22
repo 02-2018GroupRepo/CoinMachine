@@ -11,32 +11,29 @@ import com.*;
 import javax.swing.*;
 
 public class Main {
+    private static ArrayList<String> validIDS = new ArrayList<String>();
+    private static Map<String, String> machineLocations = new HashMap<>();
 
-    public static void main(String[] strings){
 
-        ArrayList<String> validIDS = new ArrayList<String>();
+    public static void main(String[] strings) {
+
+
         validIDS.add("1234");
 
-
-        Map<String, String> machineLocations = new HashMap<>();
 
         machineLocations.put("some ip", "Florida");
         machineLocations.put("another ip", "Colorado");
 
 
-
-
-
-        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(System.in));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
         String input = "";
 
-        try
-        {
+        try {
             System.out.println("Input Operator ID");
-            input= bufferedReader.readLine();
-           // AbstractMachine abstractAction = new SnackMachine();
-        }catch (Exception e ){
+            input = bufferedReader.readLine();
+            // AbstractMachine abstractAction = new SnackMachine();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
