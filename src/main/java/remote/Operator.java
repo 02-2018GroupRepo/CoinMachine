@@ -1,5 +1,8 @@
 package remote;
 
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -9,39 +12,15 @@ import java.util.ArrayList;
 
 public class Operator {
 
-    static ArrayList<String> validIDS = new ArrayList<String>();
-    int myMachineID;
-    public void getLogFile(String employeeID) {
+public void getTotalMoneyByLocation(String location){
 
-        if (validIDS.contains(employeeID)) {
+    String tURL = "http://192.168.88.167:8080/requestAmount";
+    UriComponentsBuilder builder = UriComponentsBuilder.
+            fromUriString(tURL);
 
-            String log;
-            String OS = System.getProperty("os.name").toLowerCase();
-            if(OS.contains("windows")){
-                log="logs\\";
-            }else
-            {
-                log = "logs/";
+    RestTemplate restTemplate = new RestTemplate();
 
-            }
-            String logPathName = log + myMachineID + ".txt";
 
-            URL url = getClass().getResource(logPathName);
-            File file = new File(url.getPath());
-
-            try (BufferedReader reader = Files.newBufferedReader(file.toPath())){
-
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
-                }
-            } catch (IOException x) {
-                System.err.format("IOException: %s%n", x);
-            } catch (NullPointerException n) {
-                System.out.println("You must be using Windows you filthy animal?");
-            }
-
-        }
-
-    }
+    String response = restTemplate.getForObject(builder.toUriString(), String.class);
+}
 }
