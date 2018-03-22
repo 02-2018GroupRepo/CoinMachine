@@ -2,13 +2,6 @@ package com;
 
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -21,7 +14,7 @@ public abstract class AbstractMachine {
     static final String COMPANY = "Backpfeifengesicht";
     private Map<COINS, Integer> holdings = new HashMap<COINS, Integer>();
     private String myLocation;
-    private LinkedList<Product>[][] machine;
+    protected LinkedList<Product>[][] machine;
     private CoinBuffer coinBuffer;
     private String machineId;
 
@@ -39,11 +32,19 @@ public abstract class AbstractMachine {
     }
 
     //Constructor
-    AbstractMachine() {
+    AbstractMachine(){
+
+    }
+    AbstractMachine(String location) {
         holdings.put(COINS.NICKEL, 0);
         holdings.put(COINS.DIME, 0);
         holdings.put(COINS.QUARTER, 0);
 
+        this.myLocation = location;
+        this.createRows();
+        this.hardCodedMachineFiller();
+        coinBuffer = new CoinBuffer(this);
+        coinBuffer.initiateInterface();
     }
 
     //Getters
@@ -176,8 +177,10 @@ public abstract class AbstractMachine {
 
     //Abstract methods
     abstract void displayInventory();
+    abstract void hardCodedMachineFiller();
+    abstract void createRows();
 
-    public void getLogFile() {
+    /*public void getLogFile() {
 
             String log;
             String OS = System.getProperty("os.name").toLowerCase();
@@ -237,7 +240,7 @@ public abstract class AbstractMachine {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
     //Probably useless
     //returns a String of accepted coins
