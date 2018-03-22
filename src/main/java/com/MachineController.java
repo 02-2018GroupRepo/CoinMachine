@@ -25,10 +25,10 @@ public class MachineController {
         return abstractMachine.getCoinAmount();
     }
 
-    @RequestMapping("/pullLogFile")
-    public String pullLogFile(){
-        return abstractMachine.getLogFile();
-    }
+//    @RequestMapping("/pullLogFile")
+//    public String pullLogFile(){
+//        return abstractMachine.getLogFile();
+//    }
 }
 
 
