@@ -1,30 +1,21 @@
 package com;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 public class SnackMachine extends AbstractMachine {
 
-   public SnackMachine(){}
+    public SnackMachine() {
+    }
 
-   public SnackMachine(String location) {
-        this.myLocation= location;
+    public SnackMachine(String location) {
+        super(location);
 
 
-        createRows();
-        createLogFile();
-
-        hardCodedMachineFiller();
-
-        coinBuffer = new CoinBuffer(this);
-        coinBuffer.initiateInterface();
+        //createLogFile();
 
     }
 
-    public void displayInventory(){
+    public void displayInventory() {
 
         for (LinkedList[] row : machine) {
             System.out.println();
@@ -38,6 +29,7 @@ public class SnackMachine extends AbstractMachine {
         System.out.println();
 
     }
+
     void hardCodedMachineFiller() {
         Product chips = new Product("BBQ", "patao", 3.50, .50);
         Product chips2 = new Product("Sea Salt", "patao", 3.50, .50);
@@ -61,9 +53,10 @@ public class SnackMachine extends AbstractMachine {
         machine[3][4].add(candy3);
 
     }
-    private void createRows(){
-        int rows =5;
-        int columns =5;
+
+      void createRows() {
+        int rows = 5;
+        int columns = 5;
         machine = new LinkedList[rows][columns];
 
 
