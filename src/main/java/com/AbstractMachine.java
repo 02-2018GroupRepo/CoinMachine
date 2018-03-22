@@ -1,22 +1,19 @@
 package com;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 public abstract class AbstractMachine {
 
-
+    //Instance variables
     static final String COMPANY = "Backpfeifengesicht";
-    Map<COINS, Integer> holdings = new HashMap<COINS, Integer>();
-    String myLocation;
+    private Map<COINS, Integer> holdings = new HashMap<COINS, Integer>();
+    private String myLocation;
     protected static int lastMachineID = 12345;
-    static ArrayList<String> validIDS = new ArrayList<String>();
-    int myMachineID;
-    LinkedList[][] machine;
+    private LinkedList<Product>[][] machine;
+    private CoinBuffer coinBuffer;
+
     public enum COINS {
         NICKEL(.05), DIME(.10), QUARTER(.25);
         double value;
@@ -29,18 +26,20 @@ public abstract class AbstractMachine {
             return value;
         }
     }
-    CoinBuffer coinBuffer;
 
+    //Constructor
     AbstractMachine() {
         holdings.put(COINS.NICKEL, 0);
         holdings.put(COINS.DIME, 0);
         holdings.put(COINS.QUARTER, 0);
-      //  getLogFile("123");
+
     }
 
+    //Getters
     public String getMyLocation() {
         return myLocation;
     }
+
 
     public double getMoneyAmount(){
         double total =0;
@@ -57,23 +56,7 @@ public abstract class AbstractMachine {
         }
     }
 
-    void changeLocation(String location) {
-        this.myLocation = location;
-    }
-
-    String getLocation() {
-        return myLocation;
-    }
-
-    String getAcceptedCoins() {
-        StringBuilder acceptable = new StringBuilder();
-        for (COINS c : COINS.values()) {
-            acceptable.append(c).append(" ");
-
-        }
-        return acceptable.toString();
-    }
-
+    //Methods
     public void addItem(String RowColumn, Product product) throws BADENTRY {
         char[] entry = RowColumn.toCharArray();
         int row;
@@ -133,7 +116,9 @@ public abstract class AbstractMachine {
         double price = 0;
 
         try {
-            price = ((Product)machine[row][col].peek()).retailPrice;
+            
+            price = ((machine[row][col].peek()).retailPrice);
+
             if (price > runningTotal) {
                 throw new INSUFFICIENTFUNDS();
             }
@@ -146,54 +131,50 @@ public abstract class AbstractMachine {
         }
         return runningTotal - price;
     }
+
+    public void addQuarters(int quantity) {
+        int currentQuantity = holdings.get(COINS.QUARTER);
+        int newQuantity = currentQuantity + quantity;
+        holdings.replace(COINS.QUARTER, newQuantity);
+    }
+
+    public void addDimes(int quantity) {
+        int currentQuantity = holdings.get(COINS.DIME);
+        int newQuantity = currentQuantity + quantity;
+        holdings.replace(COINS.DIME, newQuantity);
+    }
+
+    public void addNickels(int quantity) {
+        int currentQuantity = holdings.get(COINS.NICKEL);
+        int newQuantity = currentQuantity + quantity;
+        holdings.replace(COINS.NICKEL, newQuantity);
+    }
+
+    public void displayMoneyAmount() {
+        double total = 0;
+        for (Map.Entry<COINS, Integer> m : holdings.entrySet()) {
+            System.out.println(m.getKey() + ":\t\t" + m.getValue());
+            total += m.getKey().getValue() * m.getValue();
+        }
+        System.out.println("Total $:\t" + total);
+    }
+
+    public void changeLocation(String location) {
+        this.myLocation = location;
+    }
+
+    //Abstract methods
     abstract void displayInventory();
-    public void getLogFile(String employeeID) {
 
-        if (validIDS.contains(employeeID)) {
-
-            String log;
-            String OS = System.getProperty("os.name").toLowerCase();
-            if(OS.contains("windows")){
-                log="logs\\";
-            }else
-            {
-                log = "logs/";
-
-            }
-            String logPathName = log + myMachineID + ".txt";
-
-            URL url = getClass().getResource(logPathName);
-            File file = new File(url.getPath());
-
-            try (BufferedReader reader = Files.newBufferedReader(file.toPath())){
-
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
-                }
-            } catch (IOException x) {
-                System.err.format("IOException: %s%n", x);
-            } catch (NullPointerException n) {
-                System.out.println("You must be using Windows you filthy animal?");
-            }
+    //Probably useless
+    //returns a String of accepted coins
+    public String getAcceptedCoins() {
+        StringBuilder acceptable = new StringBuilder();
+        for (COINS c : COINS.values()) {
+            acceptable.append(c).append(" ");
 
         }
-
-    }
-    public void addQuarters(int amount){
-        int currentAmount = holdings.get(COINS.QUARTER);
-        int newAount = currentAmount + amount;
-        holdings.replace(COINS.QUARTER, newAount);
-    }
-    public void addDimes(int amount){
-        int currentAmount = holdings.get(COINS.DIME);
-        int newAount = currentAmount + amount;
-        holdings.replace(COINS.DIME, newAount);
-    }
-    public void addNickels(int amount){
-        int currentAmount = holdings.get(COINS.NICKEL);
-        int newAount = currentAmount + amount;
-        holdings.replace(COINS.NICKEL, newAount);
+        return acceptable.toString();
     }
 
 }
