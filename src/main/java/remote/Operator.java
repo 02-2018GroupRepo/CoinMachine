@@ -1,4 +1,4 @@
-package com;
+package remote;
 
 public class Operator {
 }

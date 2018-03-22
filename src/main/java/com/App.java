@@ -1,5 +1,7 @@
 package com;
 
+import remote.SecurityCode;
+
 import java.util.Scanner;
 
 public class App

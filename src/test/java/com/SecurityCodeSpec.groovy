@@ -1,5 +1,6 @@
 package com
 
+import remote.SecurityCode
 import spock.lang.Specification
 
 class SecurityCodeSpec extends Specification{
