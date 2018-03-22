@@ -116,7 +116,7 @@ public abstract class AbstractMachine {
         double price = 0;
 
         try {
-            
+
             price = ((machine[row][col].peek()).retailPrice);
 
             if (price > runningTotal) {
