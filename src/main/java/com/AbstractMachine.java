@@ -1,12 +1,14 @@
 package com;
 
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.*;
-
+@Component
 public abstract class AbstractMachine {
 
 
@@ -51,10 +53,11 @@ public abstract class AbstractMachine {
     }
 
     // used to return each coin
-    public void getCoinAmount() {
-        for (Map.Entry<COINS, Integer> m : holdings.entrySet()) {
-            System.out.println(m.getKey() + ":\t\t" + m.getValue());
-        }
+    public Map getCoinAmount() {
+//        for (Map.Entry<COINS, Integer> m : holdings.entrySet()) {
+//            System.out.println(m.getKey() + ":\t\t" + m.getValue());
+//        }
+        return holdings;
     }
 
     void changeLocation(String location) {
