@@ -63,13 +63,22 @@ class OperatorSpec extends Specification {
         AbstractMachine vMachine = new SnackMachine();
 
         when: "The operator wants to see the amount of each coin in the machine"
-        Map coins = vMachine.getCoinAmount();
+        String coins = vMachine.getCoinAmount();
 
         then: "The machine should return a map of the coins and their amount"
-        coins.get(AbstractMachine.COINS.NICKEL) == 5;
-        coins.get(AbstractMachine.COINS.DIME) == 6;
-        coins.get(AbstractMachine.COINS.QUARTER) == 6;
+        coins == '{"NICKEL":5,"QUARTER":6,"DIME":6}'
     }
 
     //change location test
+    def "Change location of a vending machine"() {
+        given: "A vending machine with the default location 'HOME'"
+        AbstractMachine vMachine = new DrinkMachine();
+        vMachine.getMyLocation() == "Home"
+
+        when: "The operator wants to change the location of a machine to the Basement"
+        vMachine.changeLocation("Basement");
+
+        then: "The location of the machine should change from Home to Basement"
+        vMachine.getMyLocation() == "Basement"
+    }
 }
