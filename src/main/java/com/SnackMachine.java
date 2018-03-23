@@ -15,39 +15,6 @@ public class SnackMachine extends AbstractMachine {
         //createLogFile();
     }
 
-    public void displayInventory() {
-        System.out.println("Compartment\tName\tPrice");
-        System.out.println("---------------------------------------");
-        for (int row = 0; row < 5; row++) {
-            for (int col = 0; col < 5; col++) {
-                if (machine[row][col].size() > 0) {
-                    char rowLetter;
-                    switch (row) {
-                        case 0:
-                            rowLetter = 'A';
-                            break;
-                        case 1:
-                            rowLetter = 'B';
-                            break;
-                        case 2:
-                            rowLetter = 'C';
-                            break;
-                        case 3:
-                            rowLetter = 'D';
-                            break;
-                        case 4:
-                            rowLetter = 'E';
-                            break;
-                        default:
-                            rowLetter = ' ';
-                    }
-                    Product p = machine[row][col].peek();
-                    System.out.println(rowLetter + Integer.toString(col) + "\t\t\t" + p.name + "\t\t\t" + p.retailPrice);
-                }
-            }
-        }
-    }
-
     void hardCodedMachineFiller() {
         Product chips = new Product("BBQ", "patao", 3.50, .50);
         Product chips2 = new Product("Sea Salt", "patao", 3.50, .50);
