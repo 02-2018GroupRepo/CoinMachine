@@ -8,15 +8,15 @@ class RemoveItemSpec extends Specification {
         given: "a machine"
         AbstractMachine vendingMachine = new SnackMachine();
         and: "a compartment, which consist of row and column name"
-        String rowColumn = "C4";
+        String rowColumn = "A0";
         and: "initial running total"
         double runningTotal = 1.00;
         and: "number of products in a compartment"
-        int size = vendingMachine.machine[2][4].size();
+        int size = vendingMachine.machine[0][0].size();
         when:"when the customer purchases the item"
         vendingMachine.removeItem(rowColumn, runningTotal);
         then:"Number of products in that compartment decreases by one"
-        vendingMachine.machine[2][4].size()== size-1;
+        vendingMachine.machine[0][0].size()== size-1;
     }
 
 
@@ -51,7 +51,7 @@ class RemoveItemSpec extends Specification {
             given: "a machine"
             AbstractMachine vendingMachine = new SnackMachine();
             and: "a compartment which consist of row and column name"
-            String rowColumn = "C4";
+            String rowColumn = "A0";
             and: "initial running total"
             double runningTotal = 0.05;
             when: "when the customer purchases the item"
@@ -66,7 +66,7 @@ class RemoveItemSpec extends Specification {
             and: "a compartment which consist of row and column name"
             String rowColumn = "C2";
             and: "a product"
-            Product snack = new Product("chips", "original", 0.5, 1.0);
+            Product snack = new Product("chips", "original", 0.5d, 1.0d);
             when: "when the customer purchases the item"
             vendingMachine.addItem(rowColumn, snack);
             then: "Appends the product to the end of that compartment"
@@ -80,11 +80,19 @@ class RemoveItemSpec extends Specification {
             and: "a compartment which consist of row and column name"
             String rowColumn = "F2";
             and: "a product"
-            Product snack = new Product("chips", "original", 0.5, 1.0);
+            Product snack = new Product("chips", "original", 0.5d, 1.0d);
             when: "when the customer purchases the item"
             vendingMachine.addItem(rowColumn, snack);
             then: "Appends the product to the end of that compartment"
             thrown(BADENTRY);
         }
+
+    def "Display inventory"() {
+        given: "a machine"
+        AbstractMachine vendingMachine = new SnackMachine();
+        when: "The inventory needs to be displayed"
+        vendingMachine.displayInventory();
+        then: "Display the inventory"
+    }
 
 }
