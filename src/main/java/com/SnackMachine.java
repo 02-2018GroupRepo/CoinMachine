@@ -8,16 +8,10 @@ import java.util.LinkedList;
 @Qualifier("snack")
 public class SnackMachine extends AbstractMachine {
 
-//    public SnackMachine() {
-//    }
 
     public SnackMachine() {
         super();
-
-
-
         //createLogFile();
-
     }
 
     public void displayInventory() {

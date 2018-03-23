@@ -10,8 +10,7 @@ import java.util.LinkedList;
 public class DrinkMachine extends AbstractMachine {
 
 
-    protected LinkedList<Product>[][] machine;
-
+  //  protected LinkedList<Product>[][] machine;
     DrinkMachine() {
         super();
         //createLogFile();
