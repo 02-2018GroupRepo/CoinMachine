@@ -9,7 +9,6 @@ import java.util.LinkedList;
 @Qualifier("drink")
 public class DrinkMachine extends AbstractMachine {
 
-
     protected LinkedList<Product>[][] machine;
 
     DrinkMachine() {
@@ -58,7 +57,6 @@ public class DrinkMachine extends AbstractMachine {
         machine[3][4].add(bottle3);
         machine[4][3].add(bottle4);
         machine[4][4].add(bottle5);
-
         machine[4][2].add(bottle6);
     }
     public void displayInventory(){

@@ -41,7 +41,6 @@ public abstract class AbstractMachine {
 /*
     @PostConstruct
     public void setstuff(){
-
         holdings.put(COINS.NICKEL, 0);
         holdings.put(COINS.DIME, 0);
         holdings.put(COINS.QUARTER, 1);
@@ -63,6 +62,7 @@ public abstract class AbstractMachine {
 
     public void startCoinBuffer(){
         coinBuffer.initiateInterface();
+
 
     }
 
