@@ -1,7 +1,11 @@
 package com;
 
+
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -14,7 +18,7 @@ public abstract class AbstractMachine {
     //Instance variables
     static final String COMPANY = "Backpfeifengesicht";
     static private Map<COINS, Integer> holdings = new HashMap<COINS, Integer>();
-    static private String myLocation;
+    static private String myLocation = "HOME";
     static protected LinkedList<Product>[][] machine;
     private CoinBuffer coinBuffer;
     static private String machineId;
@@ -32,20 +36,15 @@ public abstract class AbstractMachine {
         }
     }
 
-    //Constructor
-    // AbstractMachine(){
 
-//    }
-/*
-    @PostConstruct
-    public void setstuff(){
-
+/*    @PostConstruct
+    public void init(){
         holdings.put(COINS.NICKEL, 0);
         holdings.put(COINS.DIME, 0);
         holdings.put(COINS.QUARTER, 1);
 
-    }
-*/
+    }*/
+
 
 
     AbstractMachine() {     //removed setting location constuctor
@@ -53,7 +52,6 @@ public abstract class AbstractMachine {
         holdings.put(COINS.DIME, 6);
         holdings.put(COINS.QUARTER, 6);
 
-        //this.myLocation = location;
         this.createRows();
         this.hardCodedMachineFiller();
         coinBuffer = new CoinBuffer(this);
@@ -61,6 +59,7 @@ public abstract class AbstractMachine {
 
     public void startCoinBuffer(){
         coinBuffer.initiateInterface();
+
 
     }
 
@@ -78,11 +77,11 @@ public abstract class AbstractMachine {
     }
 
     // used to return each coin
-    static public Map getCoinAmount() {
-//        for (Map.Entry<COINS, Integer> m : holdings.entrySet()) {
-//            System.out.println(m.getKey() + ":\t\t" + m.getValue());
-//        }
-        return holdings;
+    static public String getCoinAmount() {
+
+        //holdings.put(COINS.DIME, new Integer(4));
+        Gson gson = new Gson();
+        return gson.toJson(holdings);
     }
 
     //Methods

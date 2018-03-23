@@ -26,7 +26,7 @@ public class MachineControllerTest {
     }
 
     @Test
-    public void basicTest() throws Exception {
+    public void moneyAmountTest() throws Exception {
         this.mockMvc
                 .perform(
                         get("/requestMoneyAmount")
@@ -37,6 +37,20 @@ public class MachineControllerTest {
                 .andExpect(content().contentType(
                         "application/html;charset=UTF-8"))
                 .andExpect(content().string("0.0"));
+
+    }
+    @Test
+    public void basicTest() throws Exception {
+        this.mockMvc
+                .perform(
+                        get("/requestCoinAmount")
+                                .accept(MediaType.parseMediaType(
+                                        "application/html;charset=UTF-8"
+                                )))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(
+                        "application/html;charset=UTF-8"))
+                .andExpect(content().string("{\"DIME\":4}"));
 
     }
 }
