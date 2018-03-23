@@ -182,6 +182,8 @@ public abstract class AbstractMachine {
         myLocation = location;
     }
 
+    static public String getLocation(){return myLocation;}
+
     //Abstract methods
     abstract void displayInventory();
 
