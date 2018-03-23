@@ -1,6 +1,5 @@
 package com;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
@@ -59,17 +58,5 @@ public class DrinkMachine extends AbstractMachine {
         machine[4][3].add(bottle4);
         machine[4][4].add(bottle5);
         machine[4][2].add(bottle6);
-    }
-    public void displayInventory(){
-        for (LinkedList[] row : machine) {
-            System.out.println();
-            for (LinkedList col : row) {
-                if (col.size() > 0) {
-                    Product p = (Product) col.peek();
-                    System.out.print(p.name + " $" + p.retailPrice + " ");
-                } else System.out.print("\t\t");
-            }
-        }
-        System.out.println();
     }
 }

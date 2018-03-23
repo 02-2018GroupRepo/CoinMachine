@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
+
 @Component
 @Qualifier("snack")
 public class SnackMachine extends AbstractMachine {
@@ -15,18 +16,36 @@ public class SnackMachine extends AbstractMachine {
     }
 
     public void displayInventory() {
-
-        for (LinkedList[] row : machine) {
-            System.out.println();
-            for (LinkedList col : row) {
-                if (col.size() > 0) {
-                    Product p = (Product) col.peek();
-                    System.out.print(p.name + " $" + p.retailPrice + " ");
-                } else System.out.print("\t\t");
+        System.out.println("Compartment\tName\tPrice");
+        System.out.println("---------------------------------------");
+        for (int row = 0; row < 5; row++) {
+            for (int col = 0; col < 5; col++) {
+                if (machine[row][col].size() > 0) {
+                    char rowLetter;
+                    switch (row) {
+                        case 0:
+                            rowLetter = 'A';
+                            break;
+                        case 1:
+                            rowLetter = 'B';
+                            break;
+                        case 2:
+                            rowLetter = 'C';
+                            break;
+                        case 3:
+                            rowLetter = 'D';
+                            break;
+                        case 4:
+                            rowLetter = 'E';
+                            break;
+                        default:
+                            rowLetter = ' ';
+                    }
+                    Product p = machine[row][col].peek();
+                    System.out.println(rowLetter + Integer.toString(col) + "\t\t\t" + p.name + "\t\t\t" + p.retailPrice);
+                }
             }
         }
-        System.out.println();
-
     }
 
     void hardCodedMachineFiller() {
@@ -43,16 +62,16 @@ public class SnackMachine extends AbstractMachine {
         Product candy4 = new Product("Hersey", "patao", 3.50, .50);
 
 
-        machine[1][3].add(chips);
-        machine[1][4].add(chips2);
-        machine[2][3].add(chips3);
-        machine[2][4].add(chips4);
-        machine[2][4].add(chips5);
-        machine[4][4].add(candy2);
-        machine[3][4].add(candy3);
+        machine[0][0].add(chips);
+        machine[0][1].add(chips2);
+        machine[1][0].add(chips3);
+        machine[1][1].add(chips4);
+        machine[2][0].add(chips5);
+        machine[2][0].add(candy2);
+        machine[2][1].add(candy3);
     }
 
-      void createRows() {
+    void createRows() {
         int rows = 5;
         int columns = 5;
         machine = new LinkedList[rows][columns];

@@ -185,7 +185,38 @@ public abstract class AbstractMachine {
     static public String getLocation(){return myLocation;}
 
     //Abstract methods
-    abstract void displayInventory();
+    public void displayInventory() {
+        System.out.println("Compartment\tName\tPrice");
+        System.out.println("---------------------------------------");
+        for (int row = 0; row < 5; row++) {
+            for (int col = 0; col < 5; col++) {
+                if (machine[row][col].size() > 0) {
+                    char rowLetter;
+                    switch (row) {
+                        case 0:
+                            rowLetter = 'A';
+                            break;
+                        case 1:
+                            rowLetter = 'B';
+                            break;
+                        case 2:
+                            rowLetter = 'C';
+                            break;
+                        case 3:
+                            rowLetter = 'D';
+                            break;
+                        case 4:
+                            rowLetter = 'E';
+                            break;
+                        default:
+                            rowLetter = ' ';
+                    }
+                    Product p = machine[row][col].peek();
+                    System.out.println(rowLetter + Integer.toString(col) + "\t\t\t" + p.name + "\t\t\t" + p.retailPrice);
+                }
+            }
+        }
+    }
 
     abstract void hardCodedMachineFiller();
 
