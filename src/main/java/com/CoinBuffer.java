@@ -63,7 +63,6 @@ public class CoinBuffer {
                             if(difference>=0){
                                 System.out.println("Your Change is $" + difference);
                                 coinReturn(difference);
-                            //todo: greedy-algorithm(difference) for coins to return to user
                                 }
                             flush();
                         } catch (BADENTRY b) {
@@ -108,8 +107,6 @@ public class CoinBuffer {
         holdings.put(AbstractMachine.COINS.NICKEL,currentNickels-nickels);
 
        // System.out.println(quarters + " "+ dimes + " "+nickels + " " + changeBack);
-
-
     }
 
     private void addDimeToBuffer() {

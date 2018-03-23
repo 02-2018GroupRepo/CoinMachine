@@ -20,8 +20,6 @@ public class Operator {
         }
         System.out.println(total);
 
-
-
     }
 
     private double sendMoneyCall(String ID) {

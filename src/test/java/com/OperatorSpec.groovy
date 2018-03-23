@@ -81,4 +81,6 @@ class OperatorSpec extends Specification {
         then: "The location of the machine should change from Home to Basement"
         vMachine.getMyLocation() == "Basement"
     }
+
+    //check money by location - method in operator
 }
