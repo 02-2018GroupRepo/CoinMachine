@@ -1,12 +1,10 @@
 package com;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import org.springframework.beans.factory.annotation.Qualifier;
+
+import com.google.gson.Gson;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
-import com.google.gson.Gson;
 
-import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
