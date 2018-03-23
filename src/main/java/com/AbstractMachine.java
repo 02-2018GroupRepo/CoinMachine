@@ -1,12 +1,10 @@
 package com;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 
-import javax.annotation.PostConstruct;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -171,14 +169,14 @@ public abstract class AbstractMachine {
         holdings.replace(COINS.NICKEL, newQuantity);
     }
 
-    public void displayMoneyAmount() {
+/*    public void displayMoneyAmount() {
         double total = 0;
         for (Map.Entry<COINS, Integer> m : holdings.entrySet()) {
             System.out.println(m.getKey() + ":\t\t" + m.getValue());
             total += m.getKey().getValue() * m.getValue();
         }
         System.out.println("Total $:\t" + total);
-    }
+    }*/
 
     static public void changeLocation(String location) {
         myLocation = location;
