@@ -7,9 +7,11 @@ import java.util.Map;
 
 public class Operator {
 
+
     public void getTotalMoneyByLocation(String location, Map<String, String> locationMap) {
 
         double total = 0;
+
 
         for (Map.Entry<String, String> m : locationMap.entrySet()) {
             if (m.getValue().equals(location)) {
@@ -17,6 +19,7 @@ public class Operator {
             }
         }
         System.out.println(total);
+
 
 
     }
@@ -33,4 +36,5 @@ public class Operator {
         double response = restTemplate.getForObject(builder.toUriString(), double.class);
         return response;
     }
+
 }
