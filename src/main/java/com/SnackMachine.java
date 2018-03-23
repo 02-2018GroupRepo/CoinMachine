@@ -14,7 +14,7 @@ public class SnackMachine extends AbstractMachine {
         super();
         //createLogFile();
     }
-
+    
     void hardCodedMachineFiller() {
         Product chips = new Product("BBQ", "patao", 3.50, .50);
         Product chips2 = new Product("Sea Salt", "patao", 3.50, .50);
