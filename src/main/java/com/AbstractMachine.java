@@ -1,7 +1,7 @@
 package com;
 
-
 import com.google.gson.Gson;
+
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
@@ -176,14 +176,14 @@ public abstract class AbstractMachine {
         holdings.replace(COINS.NICKEL, newQuantity);
     }
 
-    public void displayMoneyAmount() {
+/*    public void displayMoneyAmount() {
         double total = 0;
         for (Map.Entry<COINS, Integer> m : holdings.entrySet()) {
             System.out.println(m.getKey() + ":\t\t" + m.getValue());
             total += m.getKey().getValue() * m.getValue();
         }
         System.out.println("Total $:\t" + total);
-    }
+    }*/
 
     static public void changeLocation(String location) {
         myLocation = location;

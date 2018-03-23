@@ -85,8 +85,6 @@ class RemoveItemSpec extends Specification {
             vendingMachine.addItem(rowColumn, snack);
             then: "Appends the product to the end of that compartment"
             thrown(BADENTRY);
-
-
         }
 
 }
