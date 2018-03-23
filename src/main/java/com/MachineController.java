@@ -16,16 +16,20 @@ public class MachineController {
 
 
     @RequestMapping("/requestMoneyAmount")
-    public double requestMoneyAmount(){
+    public double requestMoneyAmount() {
         return abstractMachine.getMoneyAmount();
     }
 
     @RequestMapping("/requestCoinAmount")
-    public Map requestCoinAmount(){
+    public Map requestCoinAmount() {
         return abstractMachine.getCoinAmount();
     }
 
+    @RequestMapping("/changeLocation")
+    public void changeLocation(@RequestParam(value = "newLocation") String location) {
+        abstractMachine.changeLocation(location);
 
+    }
 /*    @RequestMapping("/pullLogFile")
     public String pullLogFile(){
         return abstractMachine.getLogFile();

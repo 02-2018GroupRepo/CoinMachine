@@ -6,26 +6,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.*;
-
-import javax.swing.*;
-
 public class Main {
+    private static ArrayList<String> validIDS = new ArrayList<String>();
+    private static Map<String, String> machineLocations = new HashMap<>();
 
-    public static void main(String[] strings){
+    public static void main(String[] strings) {
 
-        ArrayList<String> validIDS = new ArrayList<String>();
         validIDS.add("1234");
 
-
-        Map<String, String> machineLocations = new HashMap<>();
-
-        machineLocations.put("some ip", "Florida");
+        machineLocations.put("123", "Florida");
         machineLocations.put("another ip", "Colorado");
-
-
-
-
 
         BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(System.in));
 
@@ -33,9 +23,20 @@ public class Main {
 
         try
         {
-            System.out.println("Input Operator ID");
-            input= bufferedReader.readLine();
-           // AbstractMachine abstractAction = new SnackMachine();
+            int i = 0;
+            while(i < 3){
+                System.out.println("Input Operator ID: ");
+                input= bufferedReader.readLine();
+                // AbstractMachine abstractAction = new SnackMachine();
+                if(validIDS.contains(input)){
+                    //correct ID/Security Code
+                    Operator opp = new Operator();
+                    opp.getTotalMoneyByLocation("Florida", machineLocations);
+                }else{
+                    i += 1;
+                    System.out.println("Sorry that ID is not valid, you have " + (3 - i) + " more attempt/s." );
+                }
+            }
         }catch (Exception e ){
             e.printStackTrace();
         }
