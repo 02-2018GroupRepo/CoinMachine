@@ -1,14 +1,19 @@
 package com;
 
-import java.util.LinkedList;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+import java.util.LinkedList;
+@Component
+@Qualifier("snack")
 public class SnackMachine extends AbstractMachine {
 
-    public SnackMachine() {
-    }
+//    public SnackMachine() {
+//    }
 
-    public SnackMachine(String location) {
-        super(location);
+    public SnackMachine() {
+        super();
+
 
 
         //createLogFile();

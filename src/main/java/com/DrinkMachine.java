@@ -1,13 +1,19 @@
 package com;
 
-import java.util.LinkedList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+import java.util.LinkedList;
+@Component
+@Qualifier("drink")
 public class DrinkMachine extends AbstractMachine {
+
 
     protected LinkedList<Product>[][] machine;
 
-    DrinkMachine(String location) {
-        super(location);
+    DrinkMachine() {
+        super();
         //createLogFile();
     }
 
@@ -52,7 +58,7 @@ public class DrinkMachine extends AbstractMachine {
         machine[3][4].add(bottle3);
         machine[4][4].add(bottle4);
         machine[4][4].add(bottle5);
-        machine[4][5].add(bottle6);
+//        machine[4][5].add(bottle6);
 
     }
     public void displayInventory(){

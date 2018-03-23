@@ -1,21 +1,25 @@
 package com;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
 @Component
+@Primary
 public abstract class AbstractMachine {
 
     //Instance variables
     static final String COMPANY = "Backpfeifengesicht";
-    private Map<COINS, Integer> holdings = new HashMap<COINS, Integer>();
-    private String myLocation;
-    protected LinkedList<Product>[][] machine;
+    static private Map<COINS, Integer> holdings = new HashMap<COINS, Integer>();
+    static private String myLocation;
+    static protected LinkedList<Product>[][] machine;
     private CoinBuffer coinBuffer;
-    private String machineId;
+    static private String machineId;
 
     public enum COINS {
         NICKEL(.05), DIME(.10), QUARTER(.25);
@@ -31,19 +35,35 @@ public abstract class AbstractMachine {
     }
 
     //Constructor
-    AbstractMachine(){
+    // AbstractMachine(){
 
-    }
-    AbstractMachine(String location) {
+//    }
+/*
+    @PostConstruct
+    public void setstuff(){
+
         holdings.put(COINS.NICKEL, 0);
         holdings.put(COINS.DIME, 0);
-        holdings.put(COINS.QUARTER, 0);
+        holdings.put(COINS.QUARTER, 1);
 
-        this.myLocation = location;
+    }
+*/
+
+
+    AbstractMachine() {     //removed setting location constuctor
+        holdings.put(COINS.NICKEL, 5);
+        holdings.put(COINS.DIME, 6);
+        holdings.put(COINS.QUARTER, 6);
+
+        //this.myLocation = location;
         this.createRows();
         this.hardCodedMachineFiller();
         coinBuffer = new CoinBuffer(this);
+    }
+
+    public void startCoinBuffer(){
         coinBuffer.initiateInterface();
+
     }
 
     //Getters
@@ -51,16 +71,16 @@ public abstract class AbstractMachine {
         return myLocation;
     }
 
-    public double getMoneyAmount(){
-        double total =0;
-        for(Map.Entry<COINS, Integer> m : holdings.entrySet()){
-            total+= m.getKey().getValue() * m.getValue();
+    static public String getMoneyAmount() {
+        double total = 0;
+        for (Map.Entry<COINS, Integer> m : holdings.entrySet()) {
+            total += m.getKey().getValue() * m.getValue();
         }
-        return total;
+        return Double.toString(total);
     }
 
     // used to return each coin
-    public Map getCoinAmount() {
+    static public Map getCoinAmount() {
 //        for (Map.Entry<COINS, Integer> m : holdings.entrySet()) {
 //            System.out.println(m.getKey() + ":\t\t" + m.getValue());
 //        }
@@ -170,13 +190,15 @@ public abstract class AbstractMachine {
         System.out.println("Total $:\t" + total);
     }
 
-    public void changeLocation(String location) {
-        this.myLocation = location;
+    static public void changeLocation(String location) {
+        myLocation = location;
     }
 
     //Abstract methods
     abstract void displayInventory();
+
     abstract void hardCodedMachineFiller();
+
     abstract void createRows();
 
     /*public void getLogFile() {
