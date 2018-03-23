@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 class OperatorSpec extends Specification {
 
-    def "Ask a vending machine the for the total money in machine"(){
+    def "Ask a vending machine for the total money in machine"(){
         given: "A vending machine"
 
         AbstractMachine vMachine = new SnackMachine();
@@ -18,5 +18,9 @@ class OperatorSpec extends Specification {
 
         then:"The machine should return total amount of money inside the machine"
         total == 1.50;
+    }
+
+    def "Ask a vending machine for the total money in a machine when it has no money"(){
+        
     }
 }
