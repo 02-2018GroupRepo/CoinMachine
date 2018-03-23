@@ -14,7 +14,7 @@ public class Operator {
 
 
         for (Map.Entry<String, String> m : locationMap.entrySet()) {
-            if (m.getValue().equals(location)) {
+            if (m.getValue().equalsIgnoreCase(location)) {
                 total += sendMoneyCall(m.getKey());
             }
         }
@@ -22,7 +22,18 @@ public class Operator {
 
     }
 
-    private double sendMoneyCall(String ID) {
+    public void getCoinQuantity(String ID){
+        String tURL = "http://192.168.88." + ID + ":8080/requestCoinAmount";
+        UriComponentsBuilder builder = UriComponentsBuilder.
+                fromUriString(tURL);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        String response = restTemplate.getForObject(builder.toUriString(), String.class);
+        System.out.println(response);
+    }
+
+    public double sendMoneyCall(String ID) {
 
         String tURL = "http://192.168.88." + ID + ":8080/requestMoneyAmount";
         UriComponentsBuilder builder = UriComponentsBuilder.
@@ -32,6 +43,7 @@ public class Operator {
 
 
         double response = restTemplate.getForObject(builder.toUriString(), double.class);
+        System.out.println(response);
         return response;
     }
 
