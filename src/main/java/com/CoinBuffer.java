@@ -60,9 +60,11 @@ public class CoinBuffer {
                     case "SELECT":
                         try {
                             double difference = parentMachine.removeItem(fullInput[1], total);
-                            if(difference>0)
+                            if(difference>=0){
                                 System.out.println("Your Change is $" + difference);
+                                coinReturn(difference);
                             //todo: greedy-algorithm(difference) for coins to return to user
+                                }
                             flush();
                         } catch (BADENTRY b) {
                             System.out.println("That entry does not exist or is out of stock");
@@ -82,6 +84,32 @@ public class CoinBuffer {
         holdings.replace(AbstractMachine.COINS.QUARTER, more + 1);
         total += .25;
         System.out.println(total);
+    }
+    public void coinReturn(double changeBack){
+
+        //double changeBack = amount;
+        if(changeBack==0){return;}
+        int quarters;
+        int dimes;
+        int nickels;
+
+        int currentQuarters = holdings.get(AbstractMachine.COINS.QUARTER);
+        int currentDimes = holdings.get(AbstractMachine.COINS.DIME);
+        int currentNickels = holdings.get(AbstractMachine.COINS.NICKEL);
+
+        quarters = (int) Math.floor(changeBack/.25);
+        changeBack %= .25;
+        dimes = (int) Math.floor(changeBack/.1);
+        changeBack %= .10;
+        nickels = (int) Math.floor(changeBack/.05);
+
+        holdings.put(AbstractMachine.COINS.QUARTER,currentQuarters-quarters);
+        holdings.put(AbstractMachine.COINS.DIME,currentDimes-dimes);
+        holdings.put(AbstractMachine.COINS.NICKEL,currentNickels-nickels);
+
+       // System.out.println(quarters + " "+ dimes + " "+nickels + " " + changeBack);
+
+
     }
 
     private void addDimeToBuffer() {

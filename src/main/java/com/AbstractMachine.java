@@ -36,17 +36,6 @@ public abstract class AbstractMachine {
         }
     }
 
-
-/*    @PostConstruct
-    public void init(){
-        holdings.put(COINS.NICKEL, 0);
-        holdings.put(COINS.DIME, 0);
-        holdings.put(COINS.QUARTER, 1);
-
-    }*/
-
-
-
     AbstractMachine() {     //removed setting location constuctor
         holdings.put(COINS.NICKEL, 5);
         holdings.put(COINS.DIME, 6);
@@ -59,7 +48,6 @@ public abstract class AbstractMachine {
 
     public void startCoinBuffer(){
         coinBuffer.initiateInterface();
-
 
     }
 
@@ -79,7 +67,12 @@ public abstract class AbstractMachine {
     // used to return each coin
     static public String getCoinAmount() {
 
-        //holdings.put(COINS.DIME, new Integer(4));
+/*
+        holdings.put(COINS.DIME, new Integer(4));
+        holdings.put(COINS.NICKEL, new Integer(5));
+        holdings.put(COINS.QUARTER, new Integer(6));
+*/
+
         Gson gson = new Gson();
         return gson.toJson(holdings);
     }
@@ -151,7 +144,7 @@ public abstract class AbstractMachine {
                 throw new INSUFFICIENTFUNDS();
             }
 
-            machine[row][col].pop();
+            System.out.println("Enjoy Your "+ machine[row][col].pop().name);
 
         } catch (ArrayIndexOutOfBoundsException ar) {
             throw new BADENTRY();
