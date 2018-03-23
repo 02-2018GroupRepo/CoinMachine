@@ -72,5 +72,4 @@ class OperatorSpec extends Specification {
     }
 
     //change location test
-    
 }
