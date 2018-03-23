@@ -6,7 +6,7 @@ import spock.lang.Specification
 class RemoveItemSpec extends Specification {
     def"removing an item from vending machine when there is a product available for purchase and running total is sufficient for purchase"(){
         given: "a machine"
-        AbstractMachine vendingMachine = new SnackMachine("GA");
+        AbstractMachine vendingMachine = new SnackMachine();
         and: "a compartment, which consist of row and column name"
         String rowColumn = "C4";
         and: "initial running total"
