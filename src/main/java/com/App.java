@@ -24,7 +24,6 @@ public class App
 
         snackMachine.startCoinBuffer();
 
-    //    AbstractMachine machine = new SnackMachine();
 
     }
 

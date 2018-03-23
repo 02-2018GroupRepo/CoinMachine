@@ -116,7 +116,7 @@ public abstract class AbstractMachine {
     }
 
     public double removeItem(String RowColumn, double runningTotal) throws BADENTRY, INSUFFICIENTFUNDS {
-        char[] entry = RowColumn.toCharArray();
+        char[] entry = RowColumn.toUpperCase().toCharArray();
         int row;
         int col;
         switch (entry[0]) {
