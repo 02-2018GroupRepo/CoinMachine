@@ -18,18 +18,4 @@ class RemoveItemSpec extends Specification {
         then:"Number of products in that compartment decreases by one"
         vendingMachine.machine[2][4].size()== size-1;
     }
-
-    def"removing an item from vending machine when there are no products available for purchase"() {
-        given: "a machine"
-        AbstractMachine vendingMachine = new SnackMachine("GA");
-        //stub this to create a machine with no products.
-        and: "a compartment, which consist of row and column name"
-        String rowColumn = "C4";
-        and: "initial running total"
-        double runningTotal = 1.00;
-        when: "when the customer purchases the item"
-        vendingMachine.removeItem(rowColumn, runningTotal);
-        then: "Number of products in that compartment decreases by one"
-        // throws BADENTRY
-    }
 }
