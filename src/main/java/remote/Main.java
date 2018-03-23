@@ -14,30 +14,57 @@ public class Main {
 
         validIDS.add("1234");
 
-        machineLocations.put("168", "Florida");
-        machineLocations.put("another ip", "Colorado");
+//        machineLocations.put("33", "Florida");
+        machineLocations.put("73", "Florida");
 
-        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(System.in));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
         String input = "";
 
-        try
-        {
+        try {
             int i = 0;
-            while(i < 3){
+            while (i < 3) {
                 System.out.println("Input Operator ID: ");
-                input= bufferedReader.readLine();
+                input = bufferedReader.readLine();
                 // AbstractMachine abstractAction = new SnackMachine();
-                if(validIDS.contains(input)){
+                if (validIDS.contains(input)) {
                     //correct ID/Security Code
+                    i = 3;
                     Operator opp = new Operator();
-                    opp.getTotalMoneyByLocation("Florida", machineLocations);
-                }else{
+                    System.out.println("Type your command: ");
+                    while (!input.equals("DONE")) {
+                        input = bufferedReader.readLine().toUpperCase();
+                        switch (input) {
+                            case "LOCATION AMOUNT":
+                                System.out.println("What location?");
+                                input = bufferedReader.readLine();
+                                opp.getTotalMoneyByLocation(input, machineLocations);
+                                break;
+                            case "ID AMOUNT":
+                                System.out.println("What is the machine ID?");
+                                input = bufferedReader.readLine();
+                                opp.sendMoneyCall(input);
+                                break;
+                            case "ID COIN":
+                                System.out.println("What is the machine ID?");
+                                input = bufferedReader.readLine();
+                                opp.getCoinQuantity(input);
+                            case "DONE":
+                                break;
+                            default:
+                                System.out.println("Not a command, here are the commands:");
+                                System.out.println("Location Amount - to get the amount of money per location.");
+                                System.out.println("ID Amount - to get the amount of the money per machine.");
+                                System.out.println("ID Coin - to get the number of coins per machine.");
+                                System.out.println("Done - to exit");
+                        }
+                    }
+                } else {
                     i += 1;
-                    System.out.println("Sorry that ID is not valid, you have " + (3 - i) + " more attempt/s." );
+                    System.out.println("Sorry that ID is not valid, you have " + (3 - i) + " more attempt(s).");
                 }
             }
-        }catch (Exception e ){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

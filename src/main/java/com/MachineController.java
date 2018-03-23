@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MachineController {
 
 
-
     @RequestMapping("/requestMoneyAmount")
     public String requestMoneyAmount() {
         return SnackMachine.getMoneyAmount();
@@ -24,13 +23,12 @@ public class MachineController {
         SnackMachine.changeLocation(location);
 
     }
+
     @RequestMapping("/getLocation")
     public void getLocation(@RequestParam(value = "newLocation") String location) {
         SnackMachine.changeLocation(location);
 
     }
-    
-
 
 /*    @RequestMapping("/pullLogFile")
     public String pullLogFile(){
