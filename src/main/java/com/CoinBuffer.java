@@ -61,7 +61,7 @@ public class CoinBuffer {
                         try {
                             double difference = parentMachine.removeItem(fullInput[1], total);
                             if(difference>=0){
-                                System.out.println("Your Change is $" + difference);
+                                System.out.println(String.format("Your Change is $" + "%.2f", difference));
                                 coinReturn(difference);
                                 }
                             flush();
@@ -78,12 +78,6 @@ public class CoinBuffer {
         }
     }
 
-    private void addQuarterToBuffer() {
-        int more = holdings.get(AbstractMachine.COINS.QUARTER);
-        holdings.replace(AbstractMachine.COINS.QUARTER, more + 1);
-        total += .25;
-        System.out.println(total);
-    }
     public void coinReturn(double changeBack){
 
         //double changeBack = amount;
@@ -108,18 +102,24 @@ public class CoinBuffer {
 
        // System.out.println(quarters + " "+ dimes + " "+nickels + " " + changeBack);
     }
+    private void addQuarterToBuffer() {
+        int more = holdings.get(AbstractMachine.COINS.QUARTER);
+        holdings.replace(AbstractMachine.COINS.QUARTER, more + 1);
+        total += .25;
+        System.out.println(String.format("%.2f", total));
+    }
 
     private void addDimeToBuffer() {
         int more = holdings.get(AbstractMachine.COINS.DIME);
         holdings.replace(AbstractMachine.COINS.DIME, more + 1);
         total += .1;
-        System.out.println(total);
+        System.out.println(String.format("%.2f", total));
     }
 
     private void addNickelToBuffer() {
         int more = holdings.get(AbstractMachine.COINS.NICKEL);
         holdings.replace(AbstractMachine.COINS.NICKEL, more + 1);
         total += .05;
-        System.out.println(total);
+        System.out.println(String.format("%.2f", total));
     }
 }
