@@ -36,7 +36,7 @@ public abstract class AbstractMachine {
 
     AbstractMachine() {     //removed setting location constuctor
         holdings.put(COINS.NICKEL, 5);
-        holdings.put(COINS.DIME, 6);
+        holdings.put(COINS.DIME, 0);
         holdings.put(COINS.QUARTER, 6);
 
         this.createRows();
